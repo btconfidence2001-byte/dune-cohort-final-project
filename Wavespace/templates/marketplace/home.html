@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Wavespace Marketplace{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="hero-copy">
+        <p class="eyebrow">Feel the Wave. Shop Better.</p>
+        <h1>Buy and sell without the Noise.</h1>
+        <p class="hero-text">
+            Wavespace is a role-based marketplace designed for control and clarity.
+            Sellers manage products and respond to buyers from one focused dashboard.
+            Sell smarter, stay organized, and grow faster.
+        </p>
+        <div class="hero-actions">
+            <a class="button button-primary" href="{% url 'marketplace:home' %}">Explore listings</a>
+            <a class="button button-ghost" href="#">Become a seller</a>
+        </div>
+    </div>
+    
+    <div class="hero-panel" aria-label="Wavespace preview">
+        <div class="panel-header">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="seller-card">
+            <p class="panel-kicker">Live Merchant Metrics</p>
+            <h2>Total Revenue</h2>
+            
+            <p style="font-size: 2rem; font-weight: 800; color: #edf8f7; margin-bottom: 8px;">₦425,000</p>
+            <p style="font-size: 0.9rem; color: #32d3c3; margin-bottom: 20px;">↑ +14.2% payout growth this week</p>
+            
+            <div class="panel-meta" style="margin-top: 16px; padding-top: 14px;">
+                <span>Active Orders</span>
+                <strong>12 Pending</strong>
+            </div>
+            <div class="panel-meta" style="margin-top: 8px; padding-top: 8px; border-top: none;">
+                <span>Escrow Verification</span>
+                <strong style="color: #f0c36a;">98% Trust Rating</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content-band">
+    <div class="section-heading">
+        <p class="eyebrow">Explore the Marketplace</p>
+        <h2>Everything you need to trade securely.</h2>
+    </div>
+    
+    <div class="feature-grid">
+        {% for item in highlights %}
+            <article class="feature-card">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.body }}</p>
+            </article>
+        {% empty %}
+            <article class="feature-card">
+                <h3>Verified Listings</h3>
+                <p>Browse authentic products ranging from electronics to daily essentials. Look for the verification badge to shop confidently from trusted local vendors.</p>
+            </article>
+
+            <article class="feature-card">
+                <h3>Instant Storefronts</h3>
+                <p>Set up your business dashboard in minutes. Upload product photos, set your prices, track your inventory, and start receiving customer offers immediately.</p>
+            </article>
+
+            <article class="feature-card">
+                <h3>Secure Negotiations</h3>
+                <p>Skip the middleman. Chat directly with sellers to negotiate prices, confirm product availability, and arrange flexible delivery or pickup terms.</p>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
