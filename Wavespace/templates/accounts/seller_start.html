@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block title %}Seller Dashboard | Wavespace{% endblock %}
+
+{% block content %}
+<style>
+    .seller-container {
+        max-width: 1000px; /* Widened to support a robust management deck */
+        margin: 2.5rem auto;
+        padding: 0 1rem;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .seller-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .seller-header {
+        border-bottom: 2px solid #f1f5f9;
+        padding-bottom: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .eyebrow {
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        color: #dc2626; /* Crimson red accent for merchant status recognition */
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        margin: 0 0 0.5rem 0;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 2rem;
+        color: #0f172a;
+    }
+
+    .merchant-intro {
+        margin: 0.5rem 0 0 0;
+        color: #64748b;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    /* Live performance grid banner row */
+    .metrics-summary-bar {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .metric-pill {
+        background: #fff1f2; /* Subtle crimson tint */
+        border: 1px solid #ffe4e6;
+        border-radius: 8px;
+        padding: 1rem;
+        text-align: left;
+    }
+
+    .metric-pill span {
+        display: block;
+        font-size: 0.8rem;
+        color: #9f1239;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .metric-pill strong {
+        display: block;
+        font-size: 1.5rem;
+        color: #0f172a;
+        margin-top: 0.25rem;
+    }
+
+    /* Core functional management workspaces split columns grid */
+    .workspace-deck {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .deck-panel {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        background: #f8fafc;
+    }
+
+    .deck-panel h3 {
+        margin: 0 0 0.75rem 0;
+        font-size: 1.15rem;
+        color: #1e293b;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .deck-panel p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #64748b;
+        line-height: 1.5;
+    }
+
+    .seller-actions {
+        display: flex;
+        gap: 1.25rem;
+        align-items: center;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 1.5rem;
+    }
+
+    .btn-profile {
+        background: #0f172a;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 0.65rem 1.25rem;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: background 0.2s ease;
+    }
+
+    .btn-profile:hover {
+        background: #1e293b;
+    }
+
+    .btn-logout-link {
+        background: none;
+        border: none;
+        color: #dc2626;
+        cursor: pointer;
+        font-weight: 500;
+        text-decoration: underline;
+        padding: 0;
+        font-size: 0.95rem;
+    }
+
+    .btn-logout-link:hover {
+        color: #991b1b;
+    }
+</style>
+
+<section class="seller-container">
+    <div class="seller-card">
+        
+        <div class="seller-header">
+            <p class="eyebrow">Merchant Headquarters</p>
+            <h1>Seller Management Deck</h1>
+            <p class="merchant-intro">
+                Logged in as merchant partner: <strong>{{ request.user.username }}</strong>. Your sales parameters and store configurations are fully initialized.
+            </p>
+        </div>
+
+        <div class="metrics-summary-bar">
+            <div class="metric-pill">
+                <span>Catalog Listings</span>
+                <strong>0 Active</strong>
+            </div>
+            <div class="metric-pill">
+                <span>Escrow Escort</span>
+                <strong>100% Rating</strong>
+            </div>
+        </div>
+
+        <div class="workspace-deck">
+            <div class="deck-panel">
+                <h3>📦 Product Catalog Ledger</h3>
+                <p>You haven't listed any items for sale yet. Once your model arrays are integrated, you can add, archive, and adjust inventory variables directly from this tracking panel.</p>
+            </div>
+            
+            <div class="deck-panel">
+                <h3>💬 Active Customer Pipeline</h3>
+                <p>Zero unread queries found. Real-time peer messages, product custom requests, and escrow confirmation threads will sync to this communication feed.</p>
+            </div>
+        </div>
+
+        <div class="seller-actions">
+            <a href="{% url 'accounts:profile' %}" class="btn-profile">
+                Account Settings
+            </a>
+            
+            <form action="{% url 'accounts:logout' %}" method="post" style="margin: 0;">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout-link">
+                    Log Out safely
+                </button>
+            </form>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

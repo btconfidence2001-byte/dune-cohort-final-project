@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Workspace Hub | Wavespace{% endblock %}
+
+{% block content %}
+<style>
+    .hub-container {
+        max-width: 650px;
+        margin: 4rem auto;
+        padding: 0 1rem;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        text-align: center;
+    }
+
+    .hub-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .hub-eyebrow {
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        color: #2563eb;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        margin: 0;
+    }
+
+    .hub-title {
+        margin: 0.75rem 0;
+        font-size: 2rem;
+        color: #0f172a;
+    }
+
+    .hub-text {
+        color: #475569;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .hub-actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .btn-hub {
+        background: #0f172a;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: background 0.2s ease;
+    }
+
+    .btn-hub:hover {
+        background: #1e293b;
+    }
+</style>
+
+<section class="hub-container">
+    <div class="hub-card">
+        <p class="hub-eyebrow">Wavespace Central</p>
+        <h1 class="hub-title">Unified Account Gateway</h1>
+        <p class="hub-text">
+            Your account authentication session is active. Click below to instantly access your customized marketplace features and dashboard tools.
+        </p>
+        
+        <div class="hub-actions">
+            <a href="{% url 'accounts:dashboard' %}" class="btn-hub">
+                Enter My Active Workspace
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

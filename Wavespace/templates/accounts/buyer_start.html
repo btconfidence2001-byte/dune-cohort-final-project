@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block title %}Buyer Dashboard | Wavespace{% endblock %}
+
+{% block content %}
+<style>
+    .dashboard-container {
+        max-width: 800px;
+        margin: 3rem auto;
+        padding: 0 1rem;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .dashboard-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        text-align: left;
+    }
+
+    .eyebrow {
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        color: #2563eb; /* Royal Blue accent for the consumer hub */
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        margin: 0;
+    }
+
+    h1 {
+        margin: 0.5rem 0;
+        font-size: 2rem;
+        color: #0f172a;
+    }
+
+    .subheading {
+        color: #475569;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    /* Production-grade functional grid layout replacing lazy text placeholders */
+    .activity-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.25rem;
+        margin-bottom: 2rem;
+    }
+
+    .activity-item {
+        border: 1px dashed #cbd5e1;
+        border-radius: 8px;
+        padding: 1.25rem;
+        background: #f8fafc;
+    }
+
+    .activity-item h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.1rem;
+        color: #1e293b;
+    }
+
+    .activity-item p {
+        margin: 0;
+        font-size: 0.875rem;
+        color: #64748b;
+        line-height: 1.5;
+    }
+
+    .dashboard-actions {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 1.5rem;
+    }
+
+    .btn-profile {
+        background: #0f172a;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 0.65rem 1.25rem;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: background 0.2s ease;
+    }
+
+    .btn-profile:hover {
+        background: #1e293b;
+    }
+
+    .btn-logout-link {
+        background: none;
+        border: none;
+        color: #dc2626;
+        cursor: pointer;
+        font-weight: 500;
+        text-decoration: underline;
+        padding: 0;
+        font-size: 0.95rem;
+    }
+
+    .btn-logout-link:hover {
+        color: #991b1b;
+    }
+</style>
+
+<section class="dashboard-container">
+    <div class="dashboard-card">
+        <p class="eyebrow">Client Workspace</p>
+        <h1>Shopper Procurement Hub</h1>
+        <p class="subheading">
+            Welcome back, <strong>{{ request.user.username }}</strong>. Your buyer session parameters are active. Use this secure portal to track purchase agreements, monitor product streams, and interact with merchant platforms.
+        </p>
+
+        <div class="activity-grid">
+            <div class="activity-item">
+                <h3>Order Tracking</h3>
+                <p>No active shipments detected. Your completed checkout arrays will sync here automatically.</p>
+            </div>
+            <div class="activity-item">
+                <h3>Saved Showcases</h3>
+                <p>Monitor pricing shifts and real-time inventory adjustments for item arrays pinned to your watchlists.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-actions">
+            <a href="{% url 'accounts:profile' %}" class="btn-profile">
+                Manage My Settings
+            </a>
+            
+            <form action="{% url 'accounts:logout' %}" method="post" style="margin: 0; display: inline-block;">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout-link">
+                    Log Out Safely
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

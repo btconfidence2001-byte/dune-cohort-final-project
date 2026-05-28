@@ -13,14 +13,18 @@ Step 1 creates the project foundation:
 
 ## Local Setup
 
-```powershell
-.\.venv\Scripts\Activate
-pip install django
-python manage.py migrate
-python manage.py runserver
-```
+```in powershell```
+- install django (pip install django)
+- Create a virtual environment (python -m venv venv)
+- Actvate it (venv\Scripts\Activate)
+- Django project package: django-admnin startproject `wavespace`
+- python manage.py makemigrations
+- python manage.py migrate
+- python manage.py runserver
+
 
 Open `http://127.0.0.1:8000/` in your browser.
 
 ## Screenshots
 ![Server is working](screenshots/server.png)
+![Migrations](screenshots/migrations.png)

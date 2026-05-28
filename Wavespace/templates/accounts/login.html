@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login | Wavespace{% endblock %}
+
+{% block content %}
+<style>
+    .form-section {
+        max-width: 480px;
+        margin: 4rem auto;
+        padding: 0 1rem;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .form-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .eyebrow {
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        color: #64748b;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        margin: 0;
+    }
+
+    h1 {
+        margin: 0.5rem 0;
+        font-size: 2rem;
+        color: #0f172a;
+    }
+
+    .form-intro {
+        color: #475569;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.25rem;
+        text-align: left;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Target Django's default rendered input widgets cleanly */
+    .form-group input[type="text"],
+    .form-group input[type="password"],
+    .form-group input[type="email"] {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        font-size: 1rem;
+        color: #0f172a;
+        background-color: #ffffff;
+        box-sizing: border-box;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .form-error {
+        color: #dc2626;
+        font-size: 0.85rem;
+        margin: 0.35rem 0 0 0;
+        font-weight: 500;
+    }
+
+    /* Global block error messaging */
+    p.form-error-block {
+        background: #fef2f2;
+        border: 1px solid #fee2e2;
+        color: #b91c1c;
+        padding: 0.75rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-button {
+        width: 100%;
+        background: #0f172a;
+        color: #ffffff;
+        border: none;
+        padding: 0.75rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 0.5rem;
+        transition: background 0.2s ease;
+    }
+
+    .form-button:hover {
+        background: #1e293b;
+    }
+
+    .form-note {
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+        color: #64748b;
+    }
+
+    .form-note a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .form-note a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<section class="form-section">
+    <div class="form-card">
+        <p class="eyebrow">Welcome back</p>
+        <h1>Login</h1>
+        <p class="form-intro">Access your secure workspace panel tools inside the environment framework.</p>
+
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="form-error-block">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    
+                    {% for error in field.errors %}
+                        <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            
+            <button class="form-button" type="submit">Log In to Account</button>
+        </form>
+
+        <p class="form-note">No account yet? <a href="{% url 'accounts:register' %}">Create one</a>.</p>
+    </div>
+</section>
+{% endblock %}
