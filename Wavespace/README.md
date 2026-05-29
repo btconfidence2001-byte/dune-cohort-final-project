@@ -21,6 +21,8 @@ Step 1 creates the project foundation:
 - python manage.py makemigrations
 - python manage.py migrate
 - python manage.py runserver
+- pip install pillow
+- python manage.py createsuperuser
 
 
 Open `http://127.0.0.1:8000/` in your browser.
@@ -28,3 +30,5 @@ Open `http://127.0.0.1:8000/` in your browser.
 ## Screenshots
 ![Server is working](screenshots/server.png)
 ![Migrations](screenshots/migrations.png)
+![install_pillow](screenshots/install_pillow.png)
+![Superuser](screenshots/Superuser.png)

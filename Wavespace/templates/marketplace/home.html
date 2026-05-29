@@ -38,6 +38,39 @@
         </div>
     </div>
 </section>
+
+<section class="listing-band">
+    <div class="section-heading">
+        <p class="eyebrow">Marketplace preview</p>
+        <h2>Latest active listings</h2>
+    </div>
+    <div class="listing-grid">
+        {% for listing in listings %}
+            <article class="listing-card">
+                {% if listing.image %}
+                    <img src="{{ listing.image.url }}" alt="{{ listing.title }}">
+                {% else %}
+                    <div class="listing-image-empty">No image yet</div>
+                {% endif %}
+                <div class="listing-card-body">
+                    <p class="listing-category">{{ listing.category.name|default:"General" }}</p>
+                    <h3>{{ listing.title }}</h3>
+                    <p>{{ listing.description|truncatewords:18 }}</p>
+                    <div class="listing-meta">
+                        <strong>NGN {{ listing.price }}</strong>
+                        <span>{{ listing.location }}</span>
+                    </div>
+                </div>
+            </article>
+        {% empty %}
+            <div class="empty-state">
+                <h3>No listings yet</h3>
+                <p>Listings will start showing here after sellers add their products.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
 <section class="content-band">
     <div class="section-heading">
         <p class="eyebrow">Explore the Marketplace</p>

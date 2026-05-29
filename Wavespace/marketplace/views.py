@@ -1,11 +1,21 @@
 from django.shortcuts import render
-from .models import Highlight
+from .models import Listing, Highlight
 
-# Create your views here.
 
-def home(request):
-    # Fetch all the highlights that are saved in my database
-    highlights = Highlight.objects.all() 
+def home_view(request):
+    active_listings = Listing.objects.filter(
+        status=Listing.Status.ACTIVE, 
+        is_available=True
+    )
     
-    # Send them to my HTML page as a variable called "highlights"
-    return render(request, 'marketplace/home.html', {'highlights': highlights})
+    try:
+        all_highlights = Highlight.objects.all()
+    except Exception:
+        all_highlights = []
+
+    context = {
+        'listings': active_listings,
+        'highlights': all_highlights
+    }
+    
+    return render(request, 'marketplace/home.html', context)
